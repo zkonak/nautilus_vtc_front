@@ -7,4 +7,7 @@ justify-content:space-around;
 align-items: center;
 width:100%;
 height:auto;
+@media only screen and (max-width: 520px) {
+    flex-direction:column;
+  }
 `;

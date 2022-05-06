@@ -1,10 +1,10 @@
 import React from "react";
 import iconTelephone from "../../../assets/icon-phone.png";
 import { MenuItem } from "../../atoms/MenuItem/MenuItem";
-import {Telephone} from "./Telephone"
+import {Telephone, TelephoneIcon} from "./Telephone"
 const TelephoneComponent = ({ label = "tel" }) => {
   return (<Telephone>
-    <img src={iconTelephone} width="50px"/>
+    <TelephoneIcon src={iconTelephone}/>
     <MenuItem>{label}</MenuItem>
     </Telephone>
     );

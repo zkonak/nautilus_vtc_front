@@ -10,7 +10,11 @@ box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 30px;
 width:20%;
 height:250px;
-
+@media only screen and (max-width:520px) {
+    
+    width:80%;
+   margin-bottom:2%;
+  }
 `;
 export const ServiceIcon = styled.img`
 padding-top:10%;

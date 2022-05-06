@@ -1,4 +1,4 @@
-import { TextArea, TextField} from "./TextArea";
+import { TextArea, Input} from "./TextArea";
 
 export const TextAreaComponent = ({ placeholder = "Discover more" }) => {
   return (
@@ -6,9 +6,10 @@ export const TextAreaComponent = ({ placeholder = "Discover more" }) => {
   );
 };
 
-export const TextFieldComponent = ({ placeholder = "Discover more" }) => {
+export const InputComponent = ({ placeholder = "Discover more",type="text" }) => {
+    
     return (
-      <TextField placeholder={placeholder}/>
+      <Input type={type} placeholder={placeholder} />
     );
   };
 

@@ -13,6 +13,10 @@ height: 62px;
 justify-content: center;
 cursor: pointer;
 opacity: 1;
+@media only screen and (max-width: 520px) {
+  width: 126px;
+  height: 42px;
+  }
 `;
 
 /* identical to box height */
@@ -31,6 +35,12 @@ export const Label = styled.p`
     props.theme.fonts.robotoGrandBold.weight};
   line-height: ${props =>
     props.theme.fonts.robotoGrandBold.lineHeight};
+  @media only screen and (max-width: 520px) {
+    font-size: ${props =>
+      props.theme.fonts.robotoRegularBold.size};
+      line-height: ${props =>
+        props.theme.fonts.robotoRegularBold.lineHeight};
+      }
 `;
 
 

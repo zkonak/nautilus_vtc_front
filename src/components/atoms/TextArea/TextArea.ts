@@ -29,10 +29,11 @@ font-family: ${props =>
 
 
 
-export const TextField = styled.input`
-type:text;
+export const Input = styled.input`
+
 background-color: ${props => props.theme.colors.grey};
-width: 25%;
+
+width:25%;
 height: 30px;
 placeholder:Votre Message..;
 border-radius: 30px;

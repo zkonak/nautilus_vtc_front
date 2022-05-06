@@ -12,7 +12,7 @@ export const TextLightWithSpace = styled.p`
     props.theme.fonts.robotoRegularLightWithSpace.lineHeight};
   letter-spacing:${props =>
     props.theme.fonts.robotoRegularLightWithSpace.letterspacing};
-  margin-top:5%;
+  margin-top:2%;
 `;
 
 export const TextLight = styled.p`

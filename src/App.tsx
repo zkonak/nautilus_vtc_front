@@ -1,28 +1,29 @@
 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route} from "react-router-dom";
 import styles from './App.module.scss';
+import SignUp from './components/template/User/SignUp';
+import Login from './components/template/User/Login';
+import Home from './components/template/Home/Home';
 
-
-import BannerComponent from './components/molecules/Banner/BannerComponent';
-
-import HeaderComponent from './components/organisms/Header/HeaderComponent';
-import ServicesComponent from './components/organisms/Services/ServicesComponent';
-import ServiceTitleComponent from './components/molecules/ServiceTitle/ServiceTitleComponent'
-import GammeComponent from './components/organisms/Gamme/GammeComponent';
-import ContactComponent from './components/organisms/Contact/ContactComponent';
 function App() {
   return (
-    <div className={styles.container}>
-     <HeaderComponent/>
-     <BannerComponent></BannerComponent>
-     <ServiceTitleComponent/>
-     <ServicesComponent/>
-     <GammeComponent/>
-     <ContactComponent/>
-     
     
      
-    </div>
+    <Router>
+      <div className={styles.container}>
+        <Routes>
+          <Route  path="/" element={<Home/>}/>
+          <Route  path="/login" element={<Login/>}/>
+          <Route  path="/signup" element={<SignUp/>}/>
+        </Routes>
+      </div>
+    </Router>
   );
+   
+  
 }
 
 export default App;

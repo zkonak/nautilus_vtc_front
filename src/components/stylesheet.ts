@@ -41,5 +41,12 @@ export default {
   height: "18px",
  
 },
+robotoSmallLight:{
+  family: "Roboto",
+ weight: "200",
+  size: "10px",
+  height: "12px",
+ 
+},
    }
   };
