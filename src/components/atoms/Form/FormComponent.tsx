@@ -11,10 +11,10 @@ import { Form, FormButton } from "./Form";
   );
 };
 
-export const FormButtonComponent = ({ label = "Discover more" }) => {
+export const FormButtonComponent = (props: any) => {
     return (
-      <FormButton>
-        <SmallLabel>{label}</SmallLabel>
+      <FormButton onClick={props.handleClick}>
+        <SmallLabel>{props.label}</SmallLabel>
       </FormButton>
     );
   };
