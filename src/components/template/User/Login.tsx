@@ -9,10 +9,11 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { userServices } from '../../../services';
+import { authLogin } from '../../../store/actions/user.action';
 const Login = () => {
   let navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
+  const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
 
@@ -20,11 +21,11 @@ const Login = () => {
 
   const handleClick = async () => {
       try {
-          const response = await userServices.signIn({ email, password });
+        
+          const response = await userServices.signIn({mail, password });
           const user = response.data;
-
-          localStorage.setItem('access-token', user.access_token);
-          dispatch(login(user));
+          localStorage.setItem('access-token', user.refreshToken);
+          dispatch(authLogin(user));
 
           navigate('/dashboard');
       } catch (error: any) {
@@ -39,9 +40,9 @@ const Login = () => {
       <HeaderComponent/>
       <TextLightWithSpace>Se Connecter</TextLightWithSpace>
      <Form>
-      <FormInput type='mail'  placeholder='E-Mail'  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}></FormInput>
+      <FormInput type='mail'  placeholder='E-Mail'  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMail(e.target.value)}></FormInput>
       <FormInput type='password'  placeholder='Mot de Pass'  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}></FormInput>
-      <FormButtonComponent label="Se Connecter"  onClick={handleClick}></FormButtonComponent>
+      <FormButtonComponent label="Se Connecter"  handleClick={handleClick}></FormButtonComponent>
       <FormLink href="/signup">Créer Mon Compte..</FormLink>
      </Form>
      
@@ -51,6 +52,4 @@ const Login = () => {
 
 export default Login;
 
-function login(user: any): any {
-  throw new Error('Function not implemented.');
-}
+

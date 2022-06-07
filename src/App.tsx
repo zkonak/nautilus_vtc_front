@@ -33,6 +33,7 @@ function App() {
           <Route  path="/reservationform" element={<ReservationForm/>}/>
           <Route  path="/reservationconfirm" element={<ReservationConfirm/>}/>
           <Route path='/dashboard' element={<PrivateRoute component={<Dashboard />} />} />
+          <Route path='/reservationtarifs' element={<PrivateRoute component={<ReservationTarifs />} />} />
           <Route  path="/contact" element={<Contact/>}/>
           <Route  path="/profil" element={<Profil/>}/>
           <Route  path="/changepass" element={<ChangePass/>}/>
@@ -49,6 +50,7 @@ function App() {
 }
 const PrivateRoute = ({ component: Component }: { component: JSX.Element }) => {
   const userState = useSelector((state: { user: userStore }) => state.user);
-  return !userState.isLogged ? <Navigate to="/" /> : Component;
+  console.log(userState)
+  return !userState.isLogged ? <Navigate to="/login" /> : Component;
 }
 export default App;

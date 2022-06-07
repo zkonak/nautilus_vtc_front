@@ -1,19 +1,19 @@
 import React from "react";
 import { Button, Label, SmallButton, SmallLabel } from "./Button";
 
-const ButtonComponent = ({ label = "Discover more" }) => {
+const ButtonComponent = (props: any)  => {
   return (
-    <Button>
-      <Label>{label}</Label>
+    <Button onClick={props.handleClick}>
+      <Label>{props.label}</Label>
     </Button>
   );
 };
 
 
-export const SmallButtonComponent = ({ label = "Discover more" }) => {
+export const SmallButtonComponent = (props: any)  => {
   return (
-    <SmallButton>
-      <SmallLabel>{label}</SmallLabel>
+    <SmallButton onClick={props.handleClick}>
+      <SmallLabel>{props.label}</SmallLabel>
     </SmallButton>
   );
 };

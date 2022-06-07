@@ -7,7 +7,7 @@ const initialState = {
 
 export default (state: userStore = initialState, action: {type: string, payload: object | string | boolean}) => {
     const {type, payload} = action;
-
+    console.log(type)
     switch (type) {
         case "LOGIN":
             return {

@@ -1,13 +1,13 @@
 import React from "react";
-import { MenuItem } from "../../atoms/MenuItem/MenuItem";
+import { MenuItem, MenuLink } from "../../atoms/MenuItem/MenuItem";
 
-const MenuBar = ({ label = "Discover more" }) => {
+const MenuBar = () => {
   return (<div>
-    <MenuItem>A Propos  |</MenuItem>
-    <MenuItem>  Reservation  |</MenuItem>
-    <MenuItem>  Forfaits  |</MenuItem>
-    <MenuItem>  Contact  |</MenuItem>
-    <MenuItem>  Espace Client  |</MenuItem></div>
+    <MenuLink href="/aboutus"><MenuItem>A Propos  |</MenuItem></MenuLink>
+    <MenuLink href="/reservationform"><MenuItem>  Reservation  |</MenuItem></MenuLink>
+    <MenuLink href="/package"><MenuItem>  Forfaits  |</MenuItem></MenuLink>
+    <MenuLink href="/contact"><MenuItem>  Contact  |</MenuItem></MenuLink>
+    <MenuLink href="/dashboard"><MenuItem>  Espace Client  |</MenuItem></MenuLink></div>
   );
 };
 

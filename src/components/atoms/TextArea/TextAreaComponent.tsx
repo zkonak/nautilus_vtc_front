@@ -1,15 +1,15 @@
 import { TextArea, Input} from "./TextArea";
 
-export const TextAreaComponent = ({ placeholder = "Discover more" }) => {
+export const TextAreaComponent = (props:any) => {
   return (
-    <TextArea placeholder={placeholder}/>
+    <TextArea placeholder={props.placeholder} onChange={props.onChange}/>
   );
 };
 
-export const InputComponent = ({ placeholder = "Discover more",type="text" }) => {
+export const InputComponent = (props:any) => {
     
     return (
-      <Input type={type} placeholder={placeholder} />
+      <Input type={props.type} placeholder={props.placeholder}  onChange={props.onChange} />
     );
   };
 

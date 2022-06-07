@@ -13,3 +13,7 @@ export const MenuItem = styled.p`
     props.theme.fonts.robotoRegularBold.lineHeight};
     cursor: pointer;
 `;
+export const MenuLink = styled.a`
+    text-decoration:none;
+    cursor: pointer;
+`;

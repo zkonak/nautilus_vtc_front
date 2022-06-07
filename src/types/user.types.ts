@@ -1,11 +1,11 @@
 export type user = {
-    email: string,
+    mail: string,
     password: string,
-    access_token: string
+    refreshToken: string
 }
 
 export type userComplete = {
-    email: string,
+    mail: string,
     password: string,
     name: string, 
     lastname:string, 

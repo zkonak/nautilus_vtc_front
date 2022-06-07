@@ -4,7 +4,7 @@ import styled from "styled-components";
 interface IProps {
     
     isActive?: boolean;
-    onClick?: () => void;
+   //onClick?: (e:React.ChangeEvent<HTMLInputElement>) => void;
     
   }
 

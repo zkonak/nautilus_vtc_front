@@ -9,13 +9,13 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { userServices } from '../../../services';
-import { login } from '../../../store/actions/user.action';
+//import { login } from '../../../store/actions/user.action';
 import ErrorAlert from '../../atoms/ErrorAlert/ErrorAlert';
 const SignUp = () => {
 
   let navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
+  const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
@@ -29,7 +29,7 @@ const SignUp = () => {
   const handleClick = async (props: any) => {
       try {
           const type="U";
-          if(email===''||email==null){
+          if(mail===''||mail==null){
             setMessage("Email est invalid");
             setError(true)
           }
@@ -51,13 +51,13 @@ const SignUp = () => {
           }
 
 
-          const response = await userServices.signUp({ email, password,name,lastname,address,tel,type});
+          const response = await userServices.signUp({ mail, password,name,lastname,address,tel,type});
           const user = response.data;
           console.log("user",user)
           //localStorage.setItem('access-token', user.access_token);
           //dispatch(login(user));
           // if(error===false){
-          //    navigate('/login');
+           navigate('/login');
           // }
            
       } catch (error: any) {
@@ -72,7 +72,7 @@ const SignUp = () => {
       <TextLightWithSpace>S'inscrire</TextLightWithSpace>
      <Form>
      <ErrorAlert error={error} setError={setError} message={message} />
-      <FormInput type='mail'  placeholder='E-Mail'  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}></FormInput>
+      <FormInput type='mail'  placeholder='E-Mail'  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMail(e.target.value)}></FormInput>
       <FormInput type='text'  placeholder='Nom'  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastname(e.target.value)}></FormInput>
       <FormInput type='text' placeholder='Prénom'  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}></FormInput>
       <FormInput type='password'  placeholder='Mot de Pass'  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}></FormInput>
