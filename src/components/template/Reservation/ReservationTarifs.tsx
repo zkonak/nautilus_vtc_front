@@ -1,28 +1,34 @@
 import { Component } from "react";
-import AddressComponent from "../../atoms/Address/AddressComponent";
-import { Form, FormInput, FormLink } from "../../atoms/Form/Form";
+
+import { Form, FormInput } from "../../atoms/Form/Form";
 import { FormButtonComponent } from "../../atoms/Form/FormComponent";
 import { TextLight, TextLightWithSpace } from "../../molecules/ServiceTitle/ServiceTitle";
 import HeaderComponent from "../../organisms/Header/HeaderComponent";
-//import AddressComponent from "../../atoms/Address/AddressComponent";
+
 import imgConfort from "../../../assets/toyotacorolla.png";
 import imgLux from "../../../assets/mercedes.png";
 import imgVan from "../../../assets/van.png";
 import { GammeDetailDiv } from "../../molecules/GammeDetail/GammeDetail";
-import { ContactBase } from "../../organisms/Contact/Contact";
+
 import { Base, ReservationImg } from "./Reservation";
+import { reservationStore } from "../../../types/reservation.types";
+import { useSelector } from "react-redux";
 
-class   ReservationTarifs extends Component {
+const ReservationTarifs = () => {
 
+    const reservationState = useSelector((state: { reservation: reservationStore }) => state.reservation);
+     
+    console.log(reservationState)
        
-render() {
+
+     
     return (<>
         <HeaderComponent/>
         <TextLightWithSpace>Réservation</TextLightWithSpace>
        <Form>
-        <TextLight>Date Heure</TextLight>
-        <TextLight>Address Departure</TextLight>
-        <TextLight>Address Destination</TextLight>
+        <TextLight>Date :{reservationState.reservation?.dateDepart?.toISOString().substring(0, 10)} Heure:{reservationState.reservation?.timeDepart}</TextLight>
+        <TextLight>Address Departure:{reservationState.reservation?.addressDepart}</TextLight>
+        <TextLight>Address Destination:{reservationState.reservation?.addressDestination}</TextLight>
        
         <GammeDetailDiv>
         <Base>
@@ -48,6 +54,6 @@ render() {
        </Form>
       
       </>);
-} 
+
 }
 export default ReservationTarifs;

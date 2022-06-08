@@ -2,7 +2,7 @@ import { user } from "../../types/user.types"
 
 export const authLogin = (user: user) => {
     localStorage.setItem('access-token', user.refreshToken);
-    console.log(user)
+    
     return {
         type: "LOGIN",
         payload: user

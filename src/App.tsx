@@ -31,12 +31,12 @@ function App() {
           <Route  path="/login" element={<Login/>}/>
           <Route  path="/signup" element={<SignUp/>}/>
           <Route  path="/reservationform" element={<ReservationForm/>}/>
-          <Route  path="/reservationconfirm" element={<ReservationConfirm/>}/>
+          <Route  path="/reservationconfirm" element={<PrivateRoute component={<ReservationConfirm />} />} />
           <Route path='/dashboard' element={<PrivateRoute component={<Dashboard />} />} />
           <Route path='/reservationtarifs' element={<PrivateRoute component={<ReservationTarifs />} />} />
           <Route  path="/contact" element={<Contact/>}/>
-          <Route  path="/profil" element={<Profil/>}/>
-          <Route  path="/changepass" element={<ChangePass/>}/>
+          <Route  path="/profil" element={<PrivateRoute component={<Profil />} />} />
+          <Route  path="/changepass" element={<PrivateRoute component={<ChangePass />} />} />
           <Route  path="/aboutus" element={<About/>}/>
           <Route  path="/package" element={<Package/>}/>
 

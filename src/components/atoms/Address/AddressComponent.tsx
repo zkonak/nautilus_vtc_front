@@ -1,128 +1,50 @@
 
-import React, { Component, Fragment } from "react";
-import fetch from 'node-fetch';
-
-class   AddressComponent extends Component<any, any> {
-    constructor(props:any) {
-        super(props);
-        this.state = {
-          activeSuggestion: 0,
-          filteredSuggestions: [],
-          showSuggestions: false,
-          userInput: ""
-        };
-      }
+import React, { useState } from "react";
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+import axios from "axios";
 
 
-      onChange = async (e: { currentTarget: { value: any; }; }) => {
-        const userInput ="monthyon";
-        // const response = await fetch("https://api-adresse.data.gouv.fr/search/?q="+userInput.toLowerCase()+"&type=housenumber&autocomplete=1");
-        // const body = await response.json()
-        // console.log(body);
-        const { suggestions} = this.props;
-       
-    
-        const filteredSuggestions = suggestions.filter(
-            (          suggestion: string) =>
-            suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-        );
-    
-        this.setState({
-          activeSuggestion: 0,
-          filteredSuggestions,
-          showSuggestions: true,
-          userInput: e.currentTarget.value
-        });
-      };
+const AddressComponent =  (props: any)  => {
+  const [options, setOptions] = useState<{"id":string,"name":string}[]>([]);
+  const [selected, setSelected] = useState<{"id":string,"name":string}>();
+  
+  const onInputChange = async (event:any, value:any, reason:any) => {
+    if (value) {
+       console.log(value.id)
+       axios.get("https://api-adresse.data.gouv.fr/search/?q="+value.split(" ").join("+")+"&limit=50")
+       .then(res => {
+        var array:{"id":string,"name":string}[] = [] 
+          res.data.features.map((item:any)=>{
+              array.push({"id":item["geometry"]["coordinates"].join(';'),"name":item["properties"]["label"]})
+          
+            })
+          setOptions(array)
+           
+         });
+    } else {
+      setOptions([]);
+    }
+  };
+  const onChange =  (event:any, value:any, reason:any) => {
+        console.log(value)
+          setSelected(value)
+          props.onChange(value)
+ };
 
-      onClick = (e: { currentTarget: { innerText: any; }; }) => {
-        this.setState({
-          activeSuggestion: 0,
-          filteredSuggestions: [],
-          showSuggestions: false,
-          userInput: e.currentTarget.innerText
-        });
-      };
+  return (<Autocomplete
+    id="disabled-options-demo"
+    options={options}
+    onInputChange={onInputChange}
+    getOptionLabel={(option) => option.name}//<--
+    style={{ width:"50%",padding:"1%",margin:"0.7%"}}
+    renderInput={(params) => <TextField {...params} label={props.label} />}
+    value={selected}
+    onChange={onChange}
+    getOptionSelected={(option, value) => option.name === value.name }
+  />)
 
-      onKeyDown = (e: { keyCode: number; }) => {
-        const { activeSuggestion, filteredSuggestions } = this.state;
-    
-        if (e.keyCode === 13) {
-          this.setState({
-            activeSuggestion: 0,
-            showSuggestions: false,
-            userInput: filteredSuggestions[activeSuggestion]
-          });
-        } else if (e.keyCode === 38) {
-          if (activeSuggestion === 0) {
-            return;
-          }
-          this.setState({ activeSuggestion: activeSuggestion - 1 });
-        }
-        // User pressed the down arrow, increment the index
-        else if (e.keyCode === 40) {
-          if (activeSuggestion - 1 === filteredSuggestions.length) {
-            return;
-          }
-          this.setState({ activeSuggestion: activeSuggestion + 1 });
-        }
-      };
-
-
-      render(){
-        const {
-          onChange,
-          onClick,
-          onKeyDown,
-          state: {
-            activeSuggestion,
-            filteredSuggestions,
-            showSuggestions,
-            userInput
-          }
-        } = this;
-    ////class="suggestions"
-        let suggestionsListComponent;
-        if (showSuggestions && userInput) {
-            if (filteredSuggestions.length) {
-              suggestionsListComponent = (
-                <ul className="suggestions"> 
-                  {filteredSuggestions.map((suggestion: any, index: any) => {
-                    let className;
-      
-                    // Flag the active suggestion with a class
-                    if (index === activeSuggestion) {
-                      className = "suggestion-active";
-                    }
-                    return (
-                      <li className={className} key={suggestion} onClick={onClick}>
-                        {suggestion}
-                      </li>
-                    );
-                  })}
-                </ul>
-              );
-            } else {
-              suggestionsListComponent = (
-                <div className="no-suggestions">
-                  <em>No suggestions available.</em>
-                </div>
-              );
-            }
-          }
-          return (
-            <Fragment>
-              <input
-                type="text"
-                onChange={onChange}
-                onKeyDown={onKeyDown}
-                value={userInput}
-              />
-              {suggestionsListComponent}
-            </Fragment>
-          );
-        }
-     
 }
+
 
 export default AddressComponent;
