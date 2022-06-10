@@ -21,7 +21,7 @@ margin:1%;
 `;
 
 export const FormInput = styled.input`
-
+accent-color:  ${props => props.theme.colors.green};
 background-color: ${props => props.theme.colors.grey};
 padding:1%;
 margin:1%;

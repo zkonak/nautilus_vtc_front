@@ -1,6 +1,6 @@
 import { signIn, getAll,signUp } from "./user.service";
-import { saveReservation,getReservation,getReservationByUser } from "./reservation.service";
-
+import { saveReservation,getReservation,getReservationByUser,getReservationCalcul } from "./reservation.service";
+import { saveGamme,getGamme,getGammeOne } from "./gamme.service";
 
 export const userServices = { 
     signIn, 
@@ -11,5 +11,12 @@ export const userServices = {
 export const reservationServices = { 
     saveReservation, 
     getReservation,
-    getReservationByUser
+    getReservationByUser,
+    getReservationCalcul
+};
+export const gammeServices = { 
+    saveGamme, 
+    getGamme,
+    getGammeOne
+    
 };

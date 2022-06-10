@@ -8,6 +8,8 @@ import { saveLocal } from "../../../store/actions/reservation.action";
 import { useDispatch, useSelector } from "react-redux";
 import { userStore } from "../../../types/user.types";
 import { useNavigate } from "react-router-dom";
+import { gammeServices, reservationServices } from '../../../services';
+
 //import AddressComponent from "../../atoms/Address/AddressComponent";
 
 const ReservationForm = () => {
@@ -21,6 +23,7 @@ const ReservationForm = () => {
     const [addressDestinationCoord, setAdressDestinationCoord] = useState<string>("");
     const [addressDestination, setAdressDestination] = useState<string>("");
     const userState = useSelector((state: { user: userStore }) => state.user);
+
     function validateHhMm(inputField:string) {
         var isValid = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/.test(inputField);
         return isValid;
@@ -29,8 +32,10 @@ const ReservationForm = () => {
     const handleClick = async () => {
       
         try {
-             
-           
+              
+            
+            
+            
             const reservation ={dateDepart:date,
                 timeDepart:hour,
                 addressDepart:addressDepart,
@@ -44,8 +49,15 @@ const ReservationForm = () => {
                 CarTypeId:0,
                 UserId:undefined,
                 ServiceId:undefined,
-                PackageId:undefined
+                PackageId:undefined,
+                prices:undefined,
+                distance :0,
+                carTypeName:undefined
             }
+            const gammeResponse=await gammeServices.getGamme();
+            const response=await reservationServices.getReservationCalcul(reservation,gammeResponse.data)
+            reservation.distance=10;
+            reservation.prices=gammeResponse.data;
             dispatch(saveLocal(reservation));
             navigate('/reservationtarifs');
         } catch (error: any) {
@@ -64,7 +76,7 @@ const ReservationForm = () => {
         <FormInput type='combobox' placeholder='Heure' onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHour(e.target.value)}></FormInput>
         <AddressComponent type='text'  label='Address Departure' onChange={(value:any) => {setAdressDepart(value.name); setAdressDepartCoord(value.id)}}></AddressComponent>
         <AddressComponent type='text' label='Address Destination' onChange={(value:any) => {setAdressDestination(value.name);setAdressDestinationCoord(value.id)}}></AddressComponent>
-        <FormButtonComponent label="Créer Mon Compte" handleClick={handleClick}></FormButtonComponent>
+        <FormButtonComponent label="Réserver" handleClick={handleClick}></FormButtonComponent>
         
        </Form>
       

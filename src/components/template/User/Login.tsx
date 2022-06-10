@@ -25,6 +25,7 @@ const Login = () => {
           const response = await userServices.signIn({mail, password });
           const user = response.data;
           localStorage.setItem('access-token', user.refreshToken);
+          localStorage.setItem('userId', user.user.id);
           dispatch(authLogin(user));
 
           navigate('/dashboard');

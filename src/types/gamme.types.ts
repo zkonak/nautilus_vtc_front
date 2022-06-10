@@ -1,4 +1,5 @@
 export type gamme = {
+    id:number,
     typeName:string| undefined,
     priceKm:number| undefined,
     

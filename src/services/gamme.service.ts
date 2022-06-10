@@ -8,4 +8,8 @@ export const saveGamme = async (gamme:gamme): Promise<any> => {
 export const getGamme = async () : Promise<any> => {
     return await http.get('/carType');
 }
+export const getGammeOne = async (id:number) : Promise<any> => {
+    console.log(id,"iddd")
+    return await http.get('/carType/get',{params:{id:id}});
+}
 

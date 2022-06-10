@@ -39,9 +39,7 @@ function App() {
           <Route  path="/changepass" element={<PrivateRoute component={<ChangePass />} />} />
           <Route  path="/aboutus" element={<About/>}/>
           <Route  path="/package" element={<Package/>}/>
-
-
-        </Routes>
+    </Routes>
       </div>
     </Router>
   );

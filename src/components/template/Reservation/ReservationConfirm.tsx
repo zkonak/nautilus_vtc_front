@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, useState } from "react";
 import AddressComponent from "../../atoms/Address/AddressComponent";
 import { Form, FormInput, FormLink } from "../../atoms/Form/Form";
 import { FormButtonComponent } from "../../atoms/Form/FormComponent";
@@ -11,25 +11,65 @@ import imgVan from "../../../assets/van.png";
 import { GammeDetailDiv } from "../../molecules/GammeDetail/GammeDetail";
 import { ContactBase } from "../../organisms/Contact/Contact";
 import { Base, ReservationImg } from "./Reservation";
+import { useSelector } from "react-redux";
+import { reservationStore } from "../../../types/reservation.types";
+import { gammeServices, reservationServices } from "../../../services";
+import ErrorAlert from "../../atoms/ErrorAlert/ErrorAlert";
+import { useNavigate } from "react-router-dom";
 
-class   ReservationConfirm extends Component {
+const ReservationConfirm = () => {
+ 
+    const [error, setError] = useState(false);
+    const [message, setMessage] = useState("");
+    let navigate = useNavigate(); 
 
-       
-render() {
+    const reservationState = useSelector((state: { reservation: reservationStore }) => state.reservation);
+   
+    let priceTotal=0
+    if(reservationState.reservation!=null && reservationState.reservation!==undefined )
+    priceTotal = reservationState.reservation?.price + reservationState.reservation?.tax
+    
+    const getCarTypeName=(carTypeId:any)=>{
+        
+           const object:any = reservationState.reservation?.prices?.filter((item:any)=>{ 
+            return item.id==reservationState.reservation?.CarTypeId
+        })
+        console.log(object)
+        return object[0].typeName;
+    }
+
+    const handleClick=()=>{
+        try{ 
+
+            const response=reservationServices.saveReservation(reservationState.reservation);
+            navigate("/dashboard")
+
+        } catch (error: any) {
+            setError(true);
+            setMessage(error.message)
+        }
+        
+
+    }
+
+
+  
     return (<>
         <HeaderComponent/>
-        <TextLightWithSpace>Réservation Confirmation</TextLightWithSpace>
+        <TextLightWithSpace>Envoyér Votre Réservation</TextLightWithSpace>
        <Form>
-        <TextLight>Date Heure</TextLight>
-        <TextLight>Address Departure</TextLight>
-        <TextLight>Address Destination</TextLight>
-        <TextLight>Prix</TextLight>
-        <TextLight>Gamme</TextLight>
-       <FormButtonComponent label="Aller à Espace Client"></FormButtonComponent>
+       <ErrorAlert error={error} setError={setError} message={message} />
+        <TextLight>Date :{reservationState.reservation?.dateDepart?.toISOString().substring(0, 10)} Heure:{reservationState.reservation?.timeDepart}</TextLight>
+        <TextLight>Address Departure:{reservationState.reservation?.addressDepart}</TextLight>
+        <TextLight>Address Destination:{reservationState.reservation?.addressDestination}</TextLight>
+        <TextLight>Total Prix(TTC):{priceTotal}</TextLight>
+        <TextLight>Gamme:{getCarTypeName(reservationState.reservation?.CarTypeId)}</TextLight>
+       <FormButtonComponent label="Envoyer" handleClick={handleClick}></FormButtonComponent>
+
        
        </Form>
       
       </>);
 } 
-}
+
 export default ReservationConfirm;
