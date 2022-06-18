@@ -25,20 +25,20 @@ const ReservationTarifs = () => {
     const dispatch = useDispatch()
     const reservationState = useSelector((state: { reservation: reservationStore }) => state.reservation);
     var prices =reservationState.reservation?.prices;
-    console.log(reservationState.reservation)
+    console.log(prices)
     // const gammeResponse=await gammeServices.getGamme();
     
-    if(prices!==undefined)
-    prices.forEach((element:any) => {
-        if(reservationState.reservation!==null && reservationState.reservation?.distance!==null && reservationState.reservation?.distance!==undefined){
-       element.price= element.priceKm * reservationState.reservation?.distance;
+    // if(prices!==undefined)
+    // prices.forEach((element:any) => {
+    //     if(reservationState.reservation!==null && reservationState.reservation?.distance!==null && reservationState.reservation?.distance!==undefined){
+    //        element.price= element.priceKm * reservationState.reservation?.distance;
       
       
-        }
-    }); 
+    //     }
+    // }); 
 
 
-     console.log(prices)
+  
 
 /*
     if( reservationState.reservation?.prices!==undefined)
@@ -67,7 +67,6 @@ const ReservationTarifs = () => {
        
     // const response = await gammeServices.getGammeOne(carTypeId)
      reservationState.reservation.CarTypeId=carTypeId;
-    // reservationState.reservation.carTypeName=response.data;
      reservationState.reservation.price=price;
      reservationState.reservation.tax=price*0.10;
      
@@ -86,12 +85,12 @@ const ReservationTarifs = () => {
         <TextLight>Address Departure:{reservationState.reservation?.addressDepart}</TextLight>
         <TextLight>Address Destination:{reservationState.reservation?.addressDestination}</TextLight>
         <GammeDetailDiv>
-     {
+     {  
           prices?.map((item:any)=>{
               return(
             <Base>
-            <TextLight>{item.typeName}</TextLight>
-           <FormInput type='radio' name="carTypeId" value={item.id}  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>{ setCarTypeId(parseInt(e.target.value));setPrice(parseInt(item.price)); }} placeholder='Gamme'></FormInput>
+            <TextLight>{item.typeName?item.typeName:item.CarType.typeName}</TextLight>
+           <FormInput type='radio' name="carTypeId" value={item.CarTypeId}  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>{ setCarTypeId(parseInt(e.target.value));setPrice(parseInt(item.price)); }} placeholder='Gamme'></FormInput>
            <TextLight>{item.price} €</TextLight>
            <ReservationImg src={imgConfort}/>
           </Base>)

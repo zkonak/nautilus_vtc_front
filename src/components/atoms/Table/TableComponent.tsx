@@ -6,45 +6,32 @@ import movies from "./movies";
 import ButtonComponent, { SmallButtonComponent } from "../Button/ButtonComponent";
 import * as FaIcons from 'react-icons/fa' 
 import { SearchBar, TableBase, TableButton } from "./Table";
+import { useState } from "react";
 
 
-export const TableComponent = ({columns=[
-        {
-            cell:(row:any) => <TableButton>Annuler</TableButton>,
-            ignoreRowClick: true,
-    		allowOverflow: true,
-    		button: true,
-         },
-        {
-            name: 'Title',
-            selector: (row: { title: any; }) => row.title,
-            sortable: true
-        },
-        {
-            name: 'Year',
-            selector: (row: { year: any; }) => row.year,
-            sortable: true
-        },
-        
-    
-    ], data= [
-            {
-                id: 1,
-                title: 'Beetlejuice',
-                year: '1988',
-               
-            },
-            {
-                id: 2,
-                title: 'Ghostbusters',
-                year: '1984',
-                
-            },
-        ]}) => {
+export const TableComponent = (props:any) => {
+    const [search, setSearch] = useState<string>("");
+    const [filteredResults, setFilteredResults] = useState([]);
+
+ const searchItems=(searchText:string) => {
+      setSearch(searchText);
+      if (searchText !== '') {
+      const filtered=props.data.filter((item:any) => {
+        return Object.values(item).join('').toLowerCase().includes(search.toLowerCase())
+    }) 
+       console.log(filtered)
+       setFilteredResults(filtered)
+    }else{
+        setFilteredResults(props.data);
+    }
+
+ }
+   
+  
   return (
     <TableBase >
-       <SearchBar placeholder="Rechercher.."/>
-        <DataTable columns={columns} data={data}        
+       <SearchBar  value={search} onChange={(e:any)=>searchItems(e.target.value)} placeholder="Rechercher.."/>
+        <DataTable columns={props.columns} data={search===''?props.data:filteredResults}        
      
           defaultSortFieldId="title"
           sortIcon={ <FaIcons.FaSortDown />}

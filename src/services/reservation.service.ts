@@ -13,10 +13,10 @@ export const getReservation = async (reservationId:number) : Promise<any> => {
     return await http.get('/reservation',{data:{id:reservationId}});
 }
 
-export const getReservationByUser = async (userId:number) : Promise<any> => {
-    return await http.get('/reservationAll',{data:{UserId:userId}});
+export const getReservationByUser = async (userId:any) : Promise<any> => {
+    return await http.get('/reservationAll',{params:{UserId:userId}});
 }
 
-export const getReservationCalcul = async (reservation:reservation,gamme:gamme) : Promise<any> => {
+export const getReservationCalcul = async (reservation:reservation,gamme:any) : Promise<any> => {
     return await http.post('/reservationCalcul',{reservation,gamme});
 }
