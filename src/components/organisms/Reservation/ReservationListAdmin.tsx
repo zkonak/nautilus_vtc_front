@@ -13,7 +13,7 @@ import axios from 'axios';
 
 
 
-const ReservationList = (props:any) => {
+const ReservationListAdmin = (props:any) => {
 
   const [data, setData] = useState<any>([]);
   const [columns, setColumns] = useState<any>([]);
@@ -30,6 +30,14 @@ const ReservationList = (props:any) => {
 
 
  }
+
+ const confirmPayment=(rowReservation:{paymentType:string,price:number,id:number})=>{
+  const response=paymentServices.savePayment({paymentType:"C",totalPrice:rowReservation.price,reservationId:rowReservation.id})
+  navigate("/dashboardAdmin")
+
+
+}
+
 
  const downloadFacture=async(e:any)=>{
    console.log(e.target.value)
@@ -71,7 +79,7 @@ const ReservationList = (props:any) => {
 
   useEffect(() => {
       const userId=localStorage.getItem("userId");
-      reservationServices.getReservationByUser(userId).then((response)=>{
+      reservationServices.getAllReservation().then((response)=>{
       let data={};  
       if(props.history){
         console.log(response.data)
@@ -116,7 +124,13 @@ const ReservationList = (props:any) => {
   ignoreRowClick: true,
   allowOverflow: true,
   button: true,
-},]);
+},{
+  
+  cell:(row:any) => <AlertDialog text="Paiement Confirm" value={row}  contextText="Vous voulez confirmer le paiement?" handleClick={confirmPayment}/>,
+  ignoreRowClick: true,
+  allowOverflow: true,
+  button: true,
+}]);
 
 }
 else{
@@ -194,4 +208,4 @@ setData(data)
   );
 };
 
-export default ReservationList;
+export default ReservationListAdmin;

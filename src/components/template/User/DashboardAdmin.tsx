@@ -7,16 +7,16 @@ import { TextLightWithSpace } from '../../molecules/ServiceTitle/ServiceTitle';
 import FooterComponent from '../../organisms/Footer/FooterComponent';
 import HeaderComponent from '../../organisms/Header/HeaderComponent';
 import ReservationList from '../../organisms/Reservation/ReservationList';
-import Sidebar from '../../organisms/SideBar/SideBar';
+import SidebarAdmin from '../../organisms/SideBar/SideBarAdmin';
 import { DashboardBase, WelcomeDiv, WelcomeText } from './User';
 
 
-const Dashboard = () => {
+const DashboardAdmin = () => {
   return (<>
      
       <DashboardBase>
-          <Sidebar/>
-        <WelcomeDiv><WelcomeText>Bienvenue Zeliha!</WelcomeText></WelcomeDiv>
+          <SidebarAdmin/>
+        <WelcomeDiv><WelcomeText>Bienvenue admin!</WelcomeText></WelcomeDiv>
       
      </DashboardBase>
      <TextLightWithSpace>Réservations A Venir</TextLightWithSpace>
@@ -34,4 +34,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardAdmin;

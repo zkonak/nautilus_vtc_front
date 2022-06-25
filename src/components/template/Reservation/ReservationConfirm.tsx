@@ -16,7 +16,7 @@ import { reservationStore } from "../../../types/reservation.types";
 import { gammeServices, reservationServices } from "../../../services";
 import ErrorAlert from "../../atoms/ErrorAlert/ErrorAlert";
 import { useNavigate } from "react-router-dom";
-import { EILSEQ } from "constants";
+
 
 const ReservationConfirm = () => {
  
@@ -30,10 +30,11 @@ const ReservationConfirm = () => {
     if(reservationState.reservation!=null && reservationState.reservation!==undefined )
     priceTotal = reservationState.reservation?.price + reservationState.reservation?.tax
     console.log(reservationState.reservation)
+    
     const getCarTypeName=(carTypeId:any)=>{
         if(reservationState.reservation?.type=="1"){
             const object:any = reservationState.reservation?.prices?.filter((item:any)=>{ 
-            return item.id==reservationState.reservation?.CarTypeId
+            return item.id==carTypeId
         })
         return object[0].typeName;
         }else{
@@ -49,6 +50,7 @@ const ReservationConfirm = () => {
         try{ 
 
             const response=reservationServices.saveReservation(reservationState.reservation);
+            
             navigate("/dashboard")
 
         } catch (error: any) {

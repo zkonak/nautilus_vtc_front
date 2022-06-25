@@ -2,7 +2,8 @@ export type user = {
     id:number,
     mail: string,
     password: string,
-    refreshToken: string
+    refreshToken: string,
+    type:string
 }
 
 export type userComplete = {
@@ -18,5 +19,6 @@ export type userComplete = {
 
 export type userStore = {
     user: user | null,
-    isLogged: boolean
+    isLogged: boolean,
+    
 }

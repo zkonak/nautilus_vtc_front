@@ -7,12 +7,14 @@ const http = axios.create({
 
 http.interceptors.request.use(request => {
   if (request.headers)
-  {
+  { 
+ 
     request.headers["Authorization"] = `Bearer ${localStorage.getItem("access-token")}`;
     request.headers["Access-Control-Allow-Origin"]= "http://127.0.0.1:3000";
     request.headers["Access-Control-Allow-Methods"]= "POST, GET, OPTIONS, PUT, DELETE";
     request.headers["Access-Control-Allow-Headers"]= "Origin, Content-Type, Accept, Authorization, X-Request-With";
 }
+
   return request;
 });
 

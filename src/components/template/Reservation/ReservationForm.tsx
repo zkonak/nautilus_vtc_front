@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import AddressComponent from "../../atoms/Address/AddressComponent";
 import { Form, FormInput } from "../../atoms/Form/Form";
 import { FormButtonComponent } from "../../atoms/Form/FormComponent";
@@ -7,7 +7,7 @@ import HeaderComponent from "../../organisms/Header/HeaderComponent";
 import { saveLocal } from "../../../store/actions/reservation.action";
 import { useDispatch, useSelector } from "react-redux";
 import { userStore } from "../../../types/user.types";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { gammeServices, packagesServices, reservationServices, serviceServices } from '../../../services';
 import { Base } from "./Reservation";
 import DropDownForfait from "../../molecules/Reservation/DropDownList";
@@ -16,7 +16,7 @@ import DropDownService from "../../molecules/Reservation/DropDownListService";
 
 //import AddressComponent from "../../atoms/Address/AddressComponent";
 
-const ReservationForm = () => {
+const ReservationForm = (props:any) => {
 
     let navigate = useNavigate(); 
     const dispatch = useDispatch(); 
@@ -30,6 +30,37 @@ const ReservationForm = () => {
     const [packageId, setPackageId] = useState<number| undefined>();
     const [serviceId, setServiceId] = useState<number>();
     const userState = useSelector((state: { user: userStore }) => state.user);
+    const params=useParams();
+
+   
+//   useEffect(() => {
+//     const reservationId = params.reservationId;
+//     console.log("reservationId",params)
+    
+//     if(reservationId){
+//        reservationServices.getReservation(parseInt(reservationId)).then(response=>{
+          
+//           let objectReservation=response.data;
+       
+          
+//     if(objectReservation){
+   
+//        setDate(objectReservation.dateDepart)
+//        setHour(objectReservation.setHour) 
+//        setAdressDepart(objectReservation.addressDepart)
+//        setType("1")
+//        setPackageId(objectReservation.packageId) 
+//        setServiceId(objectReservation.serviceId) 
+//     }
+         
+//        })   
+      
+//     }
+    
+   
+//  } , []);  
+
+
     
     function validateHhMm(inputField:string) {
         var isValid = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/.test(inputField);
@@ -39,7 +70,7 @@ const ReservationForm = () => {
     const handleClick = async () => {
       
         try {
-              
+            
             if(type==="2") setServiceId(0);
             if(type==="3") setPackageId(0);
 
@@ -53,7 +84,7 @@ const ReservationForm = () => {
                 tax:0,
                 priceKm:0,
                 packageService:"",
-                dateDestination:date,
+                dateDestination:undefined,
                 timeDestination:undefined,
                 CarTypeId:0,
                 UserId:undefined,

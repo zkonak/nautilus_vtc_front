@@ -6,7 +6,7 @@ export const TableBase = styled.div `
   flex-direction:column;
   align-items:center;
   
-  margin:2%;
+  margin-left:3%;
   padding:1%
 `
 
@@ -14,7 +14,7 @@ export const SearchBar = styled.input`
 
 background-color: ${props => props.theme.colors.white};
 type:text;
-width:70%;
+width:80%;
 height: 30px;
 placeholder:Rechercher..;
 border-radius: 30px;
@@ -42,7 +42,7 @@ font-family: ${props =>
     border:0px 0px 0px 0px;
     display: flex;
     align-items: center;
-    width: 80%;
+    width: 70%;
     height: 30px;
     justify-content: center;
     cursor: pointer;

@@ -19,6 +19,7 @@ import About from "./components/template/Contact/About";
 import Package from "./components/template/Home/Package";
 import { useSelector } from "react-redux";
 import { userStore } from "./types/user.types";
+import DashboardAdmin from "./components/template/User/DashboardAdmin";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route  path="/login" element={<Login/>}/>
           <Route  path="/signup" element={<SignUp/>}/>
           <Route  path="/reservationform" element={<ReservationForm/>}/>
+          <Route  path="/reservationform/:reservationId" element={<PrivateRoute component={<ReservationForm/>} />}/>
           <Route  path="/reservationconfirm" element={<PrivateRoute component={<ReservationConfirm />} />} />
           <Route path='/dashboard' element={<PrivateRoute component={<Dashboard />} />} />
           <Route path='/reservationtarifs' element={<PrivateRoute component={<ReservationTarifs />} />} />
@@ -39,6 +41,8 @@ function App() {
           <Route  path="/changepass" element={<PrivateRoute component={<ChangePass />} />} />
           <Route  path="/aboutus" element={<About/>}/>
           <Route  path="/package" element={<Package/>}/>
+          <Route path='/dashboardAdmin' element={<PrivateRoute component={<DashboardAdmin />} />} />
+          
     </Routes>
       </div>
     </Router>
@@ -48,7 +52,8 @@ function App() {
 }
 const PrivateRoute = ({ component: Component }: { component: JSX.Element }) => {
   const userState = useSelector((state: { user: userStore }) => state.user);
-  console.log(userState)
+  
   return !userState.isLogged ? <Navigate to="/login" /> : Component;
 }
+
 export default App;

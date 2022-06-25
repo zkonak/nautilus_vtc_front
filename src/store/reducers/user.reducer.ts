@@ -2,7 +2,8 @@ import { userStore } from "../../types/user.types";
 
 const initialState = {
     user: null,
-    isLogged: false
+    isLogged: false,
+  
 };
 
 export default (state: userStore = initialState, action: {type: string, payload: object | string | boolean}) => {

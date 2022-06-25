@@ -38,6 +38,7 @@ export const TableComponent = (props:any) => {
           pagination
           
           
+          
          // selectableRows
         />
     
