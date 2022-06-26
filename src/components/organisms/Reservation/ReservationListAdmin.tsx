@@ -47,7 +47,7 @@ const ReservationListAdmin = (props:any) => {
   //   saveAs(file, 'fileName.pdf');
 
    // })
-   axios.post("http://127.0.0.1:8080/payment/download/",
+   axios.post(process.env.APP_PORT+"/payment/download/",
         {
           "paymentId" :e.target.value
         },
@@ -55,7 +55,8 @@ const ReservationListAdmin = (props:any) => {
             responseType: 'arraybuffer',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/pdf'
+                'Accept': 'application/pdf',
+                'Authorization' : `Bearer ${localStorage.getItem("access-token")}`
             }
            
         })

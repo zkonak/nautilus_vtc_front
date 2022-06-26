@@ -17,9 +17,11 @@ import Profil from "./components/template/User/Profil";
 import ChangePass from "./components/template/User/ChangePass";
 import About from "./components/template/Contact/About";
 import Package from "./components/template/Home/Package";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userStore } from "./types/user.types";
 import DashboardAdmin from "./components/template/User/DashboardAdmin";
+import { authLogin } from "./store/actions/user.action";
+import Disconnect from "./components/template/User/Disconnect";
 
 function App() {
   return (
@@ -41,8 +43,9 @@ function App() {
           <Route  path="/changepass" element={<PrivateRoute component={<ChangePass />} />} />
           <Route  path="/aboutus" element={<About/>}/>
           <Route  path="/package" element={<Package/>}/>
-          <Route path='/dashboardAdmin' element={<PrivateRoute component={<DashboardAdmin />} />} />
-          
+          <Route path='/dashboardAdmin' element={<PrivateRouteAdmin component={<DashboardAdmin />} />} />
+          <Route  path="/disconnect" element={<PrivateRoute component={<Disconnect />} />} />
+         
     </Routes>
       </div>
     </Router>
@@ -51,9 +54,21 @@ function App() {
   
 }
 const PrivateRoute = ({ component: Component }: { component: JSX.Element }) => {
+  //const dispatch = useDispatch();
   const userState = useSelector((state: { user: userStore }) => state.user);
+  // if(!userState.user && localStorage.getItem("user")){
+  //   const user=localStorage.getItem("user")
+  //   const userState=user ? JSON.parse(user) : {};
+  //   dispatch(authLogin(userState));
+  // }
   
   return !userState.isLogged ? <Navigate to="/login" /> : Component;
+}
+const PrivateRouteAdmin = ({ component: Component }: { component: JSX.Element }) => {
+  
+  const userState = useSelector((state: { user: userStore }) => state.user);
+  console.log(userState)
+  return userState.isLogged && userState.user?.type==="A" ? Component :<Navigate to="/login" /> ;
 }
 
 export default App;

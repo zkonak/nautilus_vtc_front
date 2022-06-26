@@ -3,6 +3,7 @@ export type user = {
     mail: string,
     password: string,
     refreshToken: string,
+    token:string
     type:string
 }
 

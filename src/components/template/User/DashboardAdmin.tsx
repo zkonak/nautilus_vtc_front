@@ -6,7 +6,7 @@ import { TextLightWithSpace } from '../../molecules/ServiceTitle/ServiceTitle';
 
 import FooterComponent from '../../organisms/Footer/FooterComponent';
 import HeaderComponent from '../../organisms/Header/HeaderComponent';
-import ReservationList from '../../organisms/Reservation/ReservationList';
+import ReservationListAdmin from '../../organisms/Reservation/ReservationListAdmin';
 import SidebarAdmin from '../../organisms/SideBar/SideBarAdmin';
 import { DashboardBase, WelcomeDiv, WelcomeText } from './User';
 
@@ -20,9 +20,9 @@ const DashboardAdmin = () => {
       
      </DashboardBase>
      <TextLightWithSpace>Réservations A Venir</TextLightWithSpace>
-     <ReservationList history/>
+     <ReservationListAdmin history/>
      <TextLightWithSpace>Réservations Passés</TextLightWithSpace>
-     <ReservationList/>
+     <ReservationListAdmin/>
 
   
     

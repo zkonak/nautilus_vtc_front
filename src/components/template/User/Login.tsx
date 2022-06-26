@@ -25,10 +25,16 @@ const Login = () => {
           const response = await userServices.signIn({mail, password});
           const user = response.data;
           
-          localStorage.setItem('access-token', user.refreshToken);
-          localStorage.setItem('userId', user.user.id);
-          dispatch(authLogin(user));
-         navigate('/dashboard');
+          localStorage.setItem('access-token', user.token);
+          localStorage.setItem('refresh-token', user.refreshToken);
+          await dispatch(authLogin(user.user));
+          if(user.user.type==="A"){
+            navigate('/dashboardAdmin');
+          }
+          else{
+             navigate('/dashboard');
+          }
+        
       } catch (error: any) {
           setError(true);
       }

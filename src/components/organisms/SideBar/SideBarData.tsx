@@ -25,7 +25,7 @@ export const SidebarData = [
     },
     {
         title: 'Se Déconnecter',
-        path: '/analytics',
+        path: '/disconnect',
         icon: <FaIcons.FaSignOutAlt />
     }
 ]

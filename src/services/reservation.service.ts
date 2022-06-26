@@ -17,7 +17,7 @@ export const getAllReservation = async () : Promise<any> => {
 }
 
 export const getReservationByUser = async (userId:any) : Promise<any> => {
-    return await http.get('/reservationAll',{params:{UserId:userId}});
+    return await http.get('/reservationAllByUser',{params:{UserId:userId}});
 }
 
 export const getReservationCalcul = async (reservation:reservation,gamme:any) : Promise<any> => {

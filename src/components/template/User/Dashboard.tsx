@@ -1,5 +1,6 @@
 
 
+import { useState } from 'react';
 import { Label } from '../../atoms/Button/Button';
 import {TableComponent} from '../../atoms/Table/TableComponent';
 import { TextLightWithSpace } from '../../molecules/ServiceTitle/ServiceTitle';
@@ -11,12 +12,20 @@ import Sidebar from '../../organisms/SideBar/SideBar';
 import { DashboardBase, WelcomeDiv, WelcomeText } from './User';
 
 
+ 
+
+
+
+
 const Dashboard = () => {
+
+  const user=localStorage.getItem("user")
+  const userState=user ? JSON.parse(user) : null;
   return (<>
      
       <DashboardBase>
           <Sidebar/>
-        <WelcomeDiv><WelcomeText>Bienvenue Zeliha!</WelcomeText></WelcomeDiv>
+        <WelcomeDiv><WelcomeText>Bienvenue {userState.name}</WelcomeText></WelcomeDiv>
       
      </DashboardBase>
      <TextLightWithSpace>Réservations A Venir</TextLightWithSpace>

@@ -1,14 +1,18 @@
 import { userStore } from "../../types/user.types";
+     const user=localStorage.getItem("user")
+    
+     const userState=user ? JSON.parse(user) : null;
+     
 
 const initialState = {
-    user: null,
-    isLogged: false,
+    user: userState,
+    isLogged: localStorage.getItem("isLogged")?true:false,
   
 };
 
 export default (state: userStore = initialState, action: {type: string, payload: object | string | boolean}) => {
     const {type, payload} = action;
-    console.log(type)
+    
     switch (type) {
         case "LOGIN":
             return {
