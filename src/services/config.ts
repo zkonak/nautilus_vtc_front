@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { refreshToken } from '../store/actions/user.action';
-
+import {APP_PORT} from "../utils/env"
 const http = axios.create({
-  baseURL: process.env.baseURL||process.env.APP_PORT,
+  baseURL:APP_PORT,
   withCredentials: true
 });
 
 http.interceptors.request.use(request => {
+  
   if (request.headers)
   { 
  
@@ -22,7 +23,7 @@ http.interceptors.response.use(response => {
   return response;
   },
   async (error:any) => {
-    console.log("izin error")
+   // console.log("izin error")
     // Pass all non 401s back to the caller.
     if (error.response.status !== 401) {
       return Promise.reject(error);
@@ -35,7 +36,7 @@ http.interceptors.response.use(response => {
     try {
      if(localStorage.getItem("refresh-token")){
        console.log("refresh",localStorage.getItem("refresh-token"))
-      axios.get(process.env.APP_PORT+"/user/auth/refresh",
+      axios.get(APP_PORT+"/user/auth/refresh",
         {
           headers: {
                 'Content-Type': 'application/json',

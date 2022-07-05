@@ -27,6 +27,7 @@ const Login = () => {
           
           localStorage.setItem('access-token', user.token);
           localStorage.setItem('refresh-token', user.refreshToken);
+          localStorage.setItem("userId",user.user.id);
           await dispatch(authLogin(user.user));
           if(user.user.type==="A"){
             navigate('/dashboardAdmin');

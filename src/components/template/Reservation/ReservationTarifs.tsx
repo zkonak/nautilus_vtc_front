@@ -66,6 +66,7 @@ const ReservationTarifs = () => {
     if(reservationState.reservation){
        
     // const response = await gammeServices.getGammeOne(carTypeId)
+    console.log("carTypeId",carTypeId)
      reservationState.reservation.CarTypeId=carTypeId;
      reservationState.reservation.price=price;
      reservationState.reservation.tax=price*0.10;
@@ -90,7 +91,7 @@ const ReservationTarifs = () => {
               return(
             <Base>
             <TextLight>{item.typeName?item.typeName:item.CarType.typeName}</TextLight>
-           <FormInput type='radio' name="carTypeId" value={item.CarTypeId}  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>{ setCarTypeId(parseInt(e.target.value));setPrice(parseInt(item.price)); }} placeholder='Gamme'></FormInput>
+           <FormInput type='radio' name="carTypeId" value={item.CarTypeId?item.CarTypeId:item.id}  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>{ setCarTypeId(parseInt(e.target.value));setPrice(parseInt(item.price)); }} placeholder='Gamme'></FormInput>
            <TextLight>{item.price} €</TextLight>
            <ReservationImg src={imgConfort}/>
           </Base>)

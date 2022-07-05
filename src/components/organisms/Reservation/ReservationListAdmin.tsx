@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import AlertDialog from '../../molecules/Reservation/Dialog';
 import { saveAs } from 'file-saver';
 import axios from 'axios';
+import {APP_PORT} from "../../../utils/env"
 
 
 
@@ -26,14 +27,16 @@ const ReservationListAdmin = (props:any) => {
   const annulation=(reservationId:any)=>{
     const response=reservationServices.deleteReservation(reservationId);
             
-            navigate("/dashboard")
+            navigate("/dashboardAdmin")
+            window.location.reload();
 
 
  }
 
  const confirmPayment=(rowReservation:{paymentType:string,price:number,id:number})=>{
-  const response=paymentServices.savePayment({paymentType:"C",totalPrice:rowReservation.price,reservationId:rowReservation.id})
+  const response=paymentServices.savePayment({paymentType:"C",totalPrice:rowReservation.price,ReservationId:rowReservation.id})
   navigate("/dashboardAdmin")
+  window.location.reload();
 
 
 }
@@ -47,7 +50,7 @@ const ReservationListAdmin = (props:any) => {
   //   saveAs(file, 'fileName.pdf');
 
    // })
-   axios.post(process.env.APP_PORT+"/payment/download/",
+   axios.post(APP_PORT+"/payment/download/",
         {
           "paymentId" :e.target.value
         },

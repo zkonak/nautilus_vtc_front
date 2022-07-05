@@ -22,6 +22,8 @@ import { userStore } from "./types/user.types";
 import DashboardAdmin from "./components/template/User/DashboardAdmin";
 import { authLogin } from "./store/actions/user.action";
 import Disconnect from "./components/template/User/Disconnect";
+import ServicesAdmin from "./components/organisms/Services/ServicesAdmin";
+import PackagesAdmin from "./components/organisms/Packages/PackagesAdmin";
 
 function App() {
   return (
@@ -45,7 +47,9 @@ function App() {
           <Route  path="/package" element={<Package/>}/>
           <Route path='/dashboardAdmin' element={<PrivateRouteAdmin component={<DashboardAdmin />} />} />
           <Route  path="/disconnect" element={<PrivateRoute component={<Disconnect />} />} />
-         
+          <Route  path="/servicesAdmin" element={<PrivateRoute component={<ServicesAdmin/>} />} />
+          <Route  path="/packagesAdmin" element={<PrivateRoute component={<PackagesAdmin/>} />} />
+
     </Routes>
       </div>
     </Router>

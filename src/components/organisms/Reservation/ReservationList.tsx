@@ -7,7 +7,7 @@ import {TableComponent} from '../../atoms/Table/TableComponent';
 import * as FaIcons from 'react-icons/fa' 
 import { useNavigate } from 'react-router-dom';
 import AlertDialog from '../../molecules/Reservation/Dialog';
-import { saveAs } from 'file-saver';
+import {APP_PORT} from "../../../utils/env"
 import axios from 'axios';
 
 
@@ -27,19 +27,20 @@ const ReservationList = (props:any) => {
     const response=reservationServices.deleteReservation(reservationId);
             
             navigate("/dashboard")
+            window.location.reload();
 
 
  }
 
  const downloadFacture=async(e:any)=>{
-   console.log(e.target.value)
+  
   // paymentServices.downloadFacture(e.target.value).then(response=>response.blob()).then(blob=>{
   //     console.log(blob)
   //   const file = new Blob([blob],{ type: 'application/pdf' });
   //   saveAs(file, 'fileName.pdf');
 
    // })
-   axios.post(process.env.APP_PORT+"/payment/download/",
+   axios.post(APP_PORT+"/payment/download/",
         {
           "paymentId" :e.target.value
         },

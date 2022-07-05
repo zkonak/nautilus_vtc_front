@@ -1,7 +1,7 @@
 import { packages } from "../types/package.types";
 import http from "./config";
 
-export const savePackage = async (packages:packages): Promise<any> => {
+export const savePackage = async (packages:Omit<packages, "id"|"description">): Promise<any> => {
     return await http.post('/package', packages);
 }
 

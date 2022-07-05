@@ -36,6 +36,8 @@ const ReservationConfirm = () => {
             const object:any = reservationState.reservation?.prices?.filter((item:any)=>{ 
             return item.id==carTypeId
         })
+        console.log(reservationState.reservation?.CarTypeId);
+        console.log(carTypeId)
         return object[0].typeName;
         }else{
             return reservationState.reservation?.prices[0].CarType.typeName

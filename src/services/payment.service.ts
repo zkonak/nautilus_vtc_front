@@ -3,7 +3,7 @@ import http from "./config";
 
 export const savePayment = async (payment:payment|null): Promise<any> => {
     
-    
+    console.log(payment)
     return await http.post('/payment', payment);
 }
 

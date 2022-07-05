@@ -18,6 +18,19 @@ export const SidebarData = [
         icon: <FaIcons.FaUser />
        
     },
+    {
+        title: 'Services',
+        path: '/servicesAdmin',
+        icon: <FaIcons.FaServicestack/>
+       
+    },
+    {
+        title: 'Forfaits',
+        path: '/packagesAdmin',
+        icon: <FaIcons.FaList/>
+       
+    },
+
 
    
     {

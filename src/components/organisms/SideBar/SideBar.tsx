@@ -39,6 +39,8 @@ const SidebarMenu = styled.div<{close: boolean}>`
     top: 0;
     left: ${({ close}) => close ? '0' : '-100%'};
     transition: .6s;
+    z-index:10;
+    
 `
 
 const MenuItems = styled.li`

@@ -1,10 +1,10 @@
 export type service = {
     id:number,
     name: string,
-    description: string,
+    description: string | null,
     price: number,
-    carTypeId:number,
-    CarType:{typeName:string}
+    CarTypeId:number,
+    CarType:{typeName:string}| null
   
     
     }
